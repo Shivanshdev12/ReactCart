@@ -1,56 +1,22 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import ListContacts from './utils/ListContacts';
-import * as ContactsAPI from './utils/ContactsAPI';
-import CreateContact from './utils/CreateContact';
+import './utils/ecoAPI';
+import Navbar from './Components/Navbar';
 
 class App extends Component {
-  state = {
-    screen: 'list',
-    contacts: []
+  state={
+    search:'',
+    schools:[]
   }
-  componentDidMount() {
-    ContactsAPI.getAll().then((contacts) => {
-      this.setState({ contacts })
-    })
-  }
-  removeContact = (contact) => {
-    this.setState((state) => ({
-      contacts: state.contacts.filter((c) => c.id !== contact.id)
-    }));
-
-    ContactsAPI.remove(contact);
-    console.log(this.state.contacts);
-  }
-  createContact(contact){
-    ContactsAPI.create(contact).then(contact=>{
-      this.setState(state=>({
-        contacts:state.contacts.concat([contact])
-      }))
-    })
-  }
-
   render() {
     return (
-      <div className="app">
-        <Route path='/' exact render={() => (
-          <ListContacts
-            contacts={this.state.contacts}
-            onDeleteContact={this.removeContact}
-            onNavigate={() => {
-              this.setState({ screen: 'create' })
-            }}
-          />
-        )} />
-        <Route path='/create' render={({history})=>(
-          <CreateContact onCreateContact={(contact)=>(
-            this.createContact(contact),
-            history.push('/')
-          )}/>
-        )}/>
+      <div>
+        <Navbar/>
       </div>
     )
   }
 }
+
+
+
 
 export default App;
