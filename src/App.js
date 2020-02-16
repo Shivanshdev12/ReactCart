@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './utils/ecoAPI';
-import Navbar from './Components/Navbar';
+import './App.css';
+import Search from './utils/Search';
+import NavBar from './Components/Navbar';
 
 class App extends Component {
   state={
@@ -10,7 +11,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
+        <NavBar/>
+        <Search/>
       </div>
     )
   }
